@@ -15,8 +15,10 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
+    kk_img2 = pg.image.load("ex02/fig/8.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kk_rect = kk_img.get_rect(topleft=(900, 400))
+    kk_rect = kk_img2.get_rect(topleft=(900, 400))
     clock = pg.time.Clock()
     tmr = 0
 
@@ -95,8 +97,12 @@ def main():
 
         # こうかとんと爆弾が衝突したかどうかを判定
         if kk_rect.colliderect(bomb_rect):
-            return # 衝突した場合、main関数からreturnする
+            kk_img2 = pg.image.load("ex02/fig/8.png")
+            
+            if kk_rect.colliderect(bomb_rect):
+                return # 衝突した場合、main関数からreturnする
 
+        
         screen.blit(bg_img, [0, 0])
         # 押下されたキーに応じて、適切な画像を選択して表示
         screen.blit(kk_images.get((dx, dy), kk_img), kk_rect.topleft)
