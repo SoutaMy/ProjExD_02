@@ -9,6 +9,7 @@ BOMB_COLOR = (255, 0, 0)  # 赤色
 
 def is_inside_screen(rect):
     return (0 <= rect.left and rect.right <= WIDTH, 0 <= rect.top and rect.bottom <= HEIGHT)
+    #areaとobjを比較して、オブジェクトが画面内にあるかどうかを判定、TrueまたはFalseタプルを返す関数。
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
