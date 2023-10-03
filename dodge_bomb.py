@@ -21,14 +21,41 @@ def main():
     bomb_vx = 5
     bomb_vy = 5
 
+    # こうかとんの初期位置と速度を設定
+    kk_x = 900
+    kk_y = 400
+    kk_speed = 5
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
 
+        # キーイベントを処理
+        keys = pg.key.get_pressed()
+        move_x = 0
+        move_y = 0
+
+        if keys[pg.K_LEFT]:
+            move_x = -kk_speed
+        if keys[pg.K_RIGHT]:
+            move_x = kk_speed
+        if keys[pg.K_UP]:
+            move_y = -kk_speed
+        if keys[pg.K_DOWN]:
+            move_y = kk_speed
+
+        # こうかとんの位置を更新
+        kk_x += move_x
+        kk_y += move_y
+
+        # 画面端で反対側に移動させる
+        kk_x = kk_x % WIDTH
+        kk_y = kk_y % HEIGHT
+
         # 背景とキャラクターの描画
         screen.blit(bg_img, [0, 0])
-        screen.blit(kk_img, [900, 400])
+        screen.blit(kk_img, [kk_x, kk_y])
 
         # 爆弾の描画
         bomb_surface = pg.Surface((2 * bomb_radius, 2 * bomb_radius), pg.SRCALPHA)
